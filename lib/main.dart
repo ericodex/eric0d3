@@ -1,24 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'db_plantas.dart';
+import 'package:custom_splash/custom_splash.dart';
 
-void main() => runApp(MeuAplicativo());
+import 'dart:core';
+
+void main() async => runApp(MeuAplicativo());
 
 // Importante: Tudo é um Widget.
+
+Map<int, Widget> op = {1: PaginaInicial(), 2: PaginaInicial()};
 
 class MeuAplicativo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map<int, Widget> op = {1: PaginaInicial(), 2: PaginaInicial()};
     return MaterialApp(
-        title: 'Material App',
+        title: 'Ericódigos',
         theme: ThemeData(
           brightness: Brightness.dark,
           backgroundColor: Colors.black,
           primaryColor: Colors.blueGrey,
         ),
-        home: PaginaInicial() // Widget Pagina Inicial
+        home: CustomSplash(
+          imagePath: 'assets/ericodigosSplash.gif',
+          backGroundColor: Colors.black,
+          animationEffect: 'zoom-out',
+          logoSize: 200,
+          home: PaginaInicial(),
+          duration: 4000,
+          type: CustomSplashType.StaticDuration,
+          outputAndHome: op,
+        ) // Widget Pagina Inicial
         );
   }
-}
+}>
 
 // Página inivcial
 class PaginaInicial extends StatelessWidget {
@@ -78,9 +94,12 @@ class SegundaPagina extends StatelessWidget {
         body: Center(
             child: RaisedButton(
           onPressed: () {
-            Navigator.pop(context);
+            principal();
           },
-          child: Text('Go back!'),
-        )));
+          child: Text('Testa base de dados'),
+        )
+        
+        ));
   }
 }
+
