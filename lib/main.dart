@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'db_plantas.dart';
+import 'cards.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
-import 'package:flip_card/flip_card.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() async => runApp(MeuAplicativo());
 
@@ -67,31 +66,36 @@ class TypewriterText extends StatelessWidget {
         delay: Duration(milliseconds: 800),
         tween: IntTween(begin: 0, end: text.length),
         builder: (context, textLength) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.android,
-                color: Colors.green,
-                size: 24.0,
+          return FittedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.phone_android,
+                    color: Colors.green,
+                    size: 24.0,
+                  ),
+                  Text(text.substring(0, textLength), style: TEXT_STYLE),
+                  ControlledAnimation(
+                    playback: Playback.LOOP,
+                    duration: Duration(milliseconds: 600),
+                    tween: IntTween(begin: 0, end: 1),
+                    builder: (context, oneOrZero) {
+                      return Opacity(
+                          opacity: oneOrZero == 1 ? 1.0 : 0.0,
+                          child: Text("_", style: TEXT_STYLE));
+                    },
+                  ),
+                  Icon(
+                    Icons.code,
+                    color: Colors.green,
+                    size: 24.0,
+                  ),
+                ],
               ),
-              Text(text.substring(0, textLength), style: TEXT_STYLE),
-              ControlledAnimation(
-                playback: Playback.LOOP,
-                duration: Duration(milliseconds: 600),
-                tween: IntTween(begin: 0, end: 1),
-                builder: (context, oneOrZero) {
-                  return Opacity(
-                      opacity: oneOrZero == 1 ? 1.0 : 0.0,
-                      child: Text("_", style: TEXT_STYLE));
-                },
-              ),
-              Icon(
-                Icons.code,
-                color: Colors.green,
-                size: 24.0,
-              ),
-            ],
+            ),
           );
         });
   }
@@ -122,97 +126,46 @@ class MeuAplicativo extends StatelessWidget {
   }
 }
 
-// Página inivcial
 class PaginaInicial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            /// Baner inicial com icones
-            Padding(
-              padding: const EdgeInsets.fromLTRB(5, 20, 5, 20),
-              child: Box(),
-            ),
-            //Segundo botão
-
-            Center(
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Butts(),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 80),
-              child: AspectRatio(
-                aspectRatio: 16 / 12,
-                child: FlipCard(
-                  direction: FlipDirection.VERTICAL, // default
-                  front: Container(
-                    alignment: Alignment.center,
-                    color: Colors.deepPurple[900],
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 150),
-                      child: Text(
-                          'Desenvolvedor de Software: Full-Stack Python e Dart Lang\n\nExperiência com BI e computação de lotes.'),
-                    ),
-                  ),
-                  back: Container(
-                    alignment: Alignment.center,
-                    color: Colors.green,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 50, 10, 150),
-                      child: Text(
-                          'Eric Oliveira Lima \n\nericol@outlook.com.br \n\n+55 034 988047387'),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SegundaPagina()));
-              },
-              textColor: Colors.white,
-              color: Colors.deepPurpleAccent,
-              padding: const EdgeInsets.all(3.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color.fromRGBO(21, 8, 23, 1.0),
-                      Color.fromRGBO(103, 39, 112, 0.8),
-                    ],
-                  ),
-                ),
-                padding: const EdgeInsets.all(10.0),
-                child: const Text('Deixe um recado:',
-                    style: TextStyle(fontSize: 20)),
-              ),
-            )
-          ],
+        body: CustomScrollView(slivers: <Widget>[
+      SliverAppBar(
+        backgroundColor: Colors.transparent,
+        expandedHeight: 100,
+        floating: true,
+        flexibleSpace: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Box(),
         ),
       ),
-    );
+      SliverFillRemaining(
+        fillOverscroll: true,
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Botao(),
+                ],
+              ),
+              /// -> Cartões
+              CartoesApresentacao(),
+            ],
+            
+          ),
+        ),
+      )
+    ]));
   }
 }
 
-class Butts extends StatelessWidget {
-  Butts({Key key}) : super(key: key);
+class Botao extends StatelessWidget {
+  Botao({Key key}) : super(key: key);
 
   isEnoughRoomForTypewriter(width) => width > 20;
-
   static final boxDecoration = BoxDecoration(
       color: Colors.black,
       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -239,7 +192,8 @@ class Butts extends StatelessWidget {
             color: Colors.green[300],
             onPressed: () {
               //-------------------------------------
-
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SegundaPagina()));
               //-------------------------------------
             },
           ),
