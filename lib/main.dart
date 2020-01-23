@@ -17,7 +17,7 @@ class Box extends StatelessWidget {
       boxShadow: [
         BoxShadow(
             color: Colors.black.withAlpha(60),
-            blurRadius: 5,
+            blurRadius: 15,
             offset: Offset(0, 8),
             spreadRadius: 2)
       ]);
@@ -25,8 +25,8 @@ class Box extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ControlledAnimation(
-      duration: Duration(milliseconds: 400),
-      tween: Tween(begin: 0.0, end: 80.0),
+      duration: Duration(milliseconds: 1400),
+      tween: Tween(begin: 0.0, end: 100.0),
       builder: (context, height) {
         return ControlledAnimation(
           duration: Duration(milliseconds: 1200),
@@ -39,7 +39,7 @@ class Box extends StatelessWidget {
               height: height,
               child: isEnoughRoomForTypewriter(width)
                   ? TypewriterText(" Ericódigos")
-                  : Expanded(child: Container()),
+                  : FittedBox(child: Container()),
             );
           },
         );
@@ -47,7 +47,7 @@ class Box extends StatelessWidget {
     );
   }
 
-  isEnoughRoomForTypewriter(width) => width > 20;
+  isEnoughRoomForTypewriter(width) => width > 25;
 }
 
 class TypewriterText extends StatelessWidget {
@@ -153,26 +153,27 @@ class PaginaInicial extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 80),
-              child: FlipCard(
-                direction: FlipDirection.VERTICAL, // default
-                front: Container(
-                  width: 300,
-                  alignment: Alignment.center,
-                  color: Colors.deepPurple[900],
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 150),
-                    child: Text(
-                        'Desenvolvedor de Software: Full-Stack Python e Dart Lang\n\n Experiência com BI e computação de lotes.'),
+              child: AspectRatio(
+                aspectRatio: 16 / 12,
+                child: FlipCard(
+                  direction: FlipDirection.VERTICAL, // default
+                  front: Container(
+                    alignment: Alignment.center,
+                    color: Colors.deepPurple[900],
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 150),
+                      child: Text(
+                          'Desenvolvedor de Software: Full-Stack Python e Dart Lang\n\nExperiência com BI e computação de lotes.'),
+                    ),
                   ),
-                ),
-                back: Container(
-                  width: 300,
-                  alignment: Alignment.center,
-                  color: Colors.green,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 50, 10, 150),
-                    child: Text(
-                        'Nome: Eric Oliveira Lima \n\n e-mail: ericol@outlook.com.br \n\n cel: +55 034 988047387'),
+                  back: Container(
+                    alignment: Alignment.center,
+                    color: Colors.green,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 50, 10, 150),
+                      child: Text(
+                          'Eric Oliveira Lima \n\nericol@outlook.com.br \n\n+55 034 988047387'),
+                    ),
                   ),
                 ),
               ),
@@ -192,7 +193,6 @@ class PaginaInicial extends StatelessWidget {
                     colors: <Color>[
                       Color.fromRGBO(21, 8, 23, 1.0),
                       Color.fromRGBO(103, 39, 112, 0.8),
-                      Color.fromRGBO(143, 55, 156, 0.6),
                     ],
                   ),
                 ),
@@ -211,6 +211,19 @@ class PaginaInicial extends StatelessWidget {
 class Butts extends StatelessWidget {
   Butts({Key key}) : super(key: key);
 
+  isEnoughRoomForTypewriter(width) => width > 20;
+
+  static final boxDecoration = BoxDecoration(
+      color: Colors.black,
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      boxShadow: [
+        BoxShadow(
+            color: Colors.black.withAlpha(60),
+            blurRadius: 15,
+            offset: Offset(0, 8),
+            spreadRadius: 2)
+      ]);
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -226,24 +239,7 @@ class Butts extends StatelessWidget {
             color: Colors.green[300],
             onPressed: () {
               //-------------------------------------
-              Alert(
-                context: context,
-                style: alertStyle,
-                type: AlertType.success,
-                title: "Desenvolvimento Nativo",
-                desc: "Para Android e IOS na mesma base de código",
-                buttons: [
-                  DialogButton(
-                    child: Text(
-                      "Sim!",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                    color: Color.fromRGBO(0, 179, 134, 1.0),
-                    radius: BorderRadius.circular(0.0),
-                  ),
-                ],
-              ).show();
+
               //-------------------------------------
             },
           ),
@@ -266,20 +262,3 @@ class SegundaPagina extends StatelessWidget {
     )));
   }
 }
-
-var alertStyle = AlertStyle(
-  animationType: AnimationType.fromTop,
-  isCloseButton: false,
-  isOverlayTapDismiss: false,
-  descStyle: TextStyle(fontWeight: FontWeight.bold),
-  animationDuration: Duration(milliseconds: 400),
-  alertBorder: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(0.0),
-    side: BorderSide(
-      color: Colors.grey,
-    ),
-  ),
-  titleStyle: TextStyle(
-    color: Colors.red,
-  ),
-);
