@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'db_plantas.dart';
+//import 'db_plantas.dart';
 import 'cards.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controls.dart';
+import 'settings.dart';
 
 void main() async => runApp(MeuAplicativo());
 
@@ -151,10 +154,10 @@ class PaginaInicial extends StatelessWidget {
                   Botao(),
                 ],
               ),
+
               /// -> Cartões
               CartoesApresentacao(),
             ],
-            
           ),
         ),
       )
@@ -193,7 +196,8 @@ class Botao extends StatelessWidget {
             onPressed: () {
               //-------------------------------------
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SegundaPagina()));
+                  //MaterialPageRoute(builder: (context) => SegundaPagina()));
+                  MaterialPageRoute(builder: (context) => Settings()));
               //-------------------------------------
             },
           ),
@@ -204,15 +208,15 @@ class Botao extends StatelessWidget {
 }
 
 class SegundaPagina extends StatelessWidget {
+  final FlareControls meusControles = FlareControls();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: RaisedButton(
-      onPressed: () {
-        principal();
-      },
-      child: Text('Testa base de dados'),
-    )));
+          child: Icon( Icons.favorite,)
+        ));
   }
 }
+
+//--------- Insert Flare Animation
