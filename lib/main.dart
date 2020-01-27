@@ -6,8 +6,6 @@ import 'cards.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
-import 'package:flare_flutter/flare_actor.dart';
-import 'package:flare_flutter/flare_controls.dart';
 import 'settings.dart';
 
 void main() async => runApp(MeuAplicativo());
@@ -183,32 +181,56 @@ class Botao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Ink(
-          decoration: const ShapeDecoration(
-            color: Colors.black,
-            shape: CircleBorder(),
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Ink(
+              decoration: const ShapeDecoration(
+                color: Colors.black,
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.android),
+                color: Colors.green[300],
+                onPressed: () {
+                  //-------------------------------------
+                  Navigator.push(context,
+                      //MaterialPageRoute(builder: (context) => SegundaPagina()));
+                      MaterialPageRoute(builder: (context) => Settings()));
+                  //-------------------------------------
+                },
+              ),
+            ),
           ),
-          child: IconButton(
-            icon: Icon(Icons.android),
-            color: Colors.green[300],
-            onPressed: () {
-              //-------------------------------------
-              Navigator.push(context,
-                  //MaterialPageRoute(builder: (context) => SegundaPagina()));
-                  MaterialPageRoute(builder: (context) => Settings()));
-              //-------------------------------------
-            },
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Ink(
+              decoration: const ShapeDecoration(
+                color: Colors.black,
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.cloud_upload),
+                color: Colors.green[300],
+                onPressed: () {
+                  //-------------------------------------
+                  Navigator.push(context,
+                      //MaterialPageRoute(builder: (context) => SegundaPagina()));
+                      MaterialPageRoute(builder: (context) => Interruptor_page()));
+                  //-------------------------------------
+                },
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
 class SegundaPagina extends StatelessWidget {
-  final FlareControls meusControles = FlareControls();
+
 
   @override
   Widget build(BuildContext context) {
