@@ -16,6 +16,7 @@ dependencies:
   flip_card: ^0.4.4
   cupertino_icons: ^0.1.2
   rflutter_alert: ^1.0.3
+  flare_flutter: ^2.0.1
 
 
 dev_dependencies:

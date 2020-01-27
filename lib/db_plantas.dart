@@ -26,6 +26,7 @@ void principal() async {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+
   //******************************************************** */
   Future<List<Planta>> listaPlantas() async {
     final Database db = await database;
@@ -41,6 +42,7 @@ void principal() async {
       );
     });
   }
+
   //******************************************************** */
   Future<void> atualizaPlanta(Planta planta) async {
     final db = await database;
@@ -52,40 +54,35 @@ void principal() async {
       whereArgs: [planta.id],
     );
   }
+
   //******************************************************** */
-  Future<void> deletarPlanta(int id) async{
+  Future<void> deletarPlanta(int id) async {
     final db = await database;
     await db.delete(
       'BD_plantas',
       where: "id = ?",
       whereArgs: [id],
-      );
+    );
   }
 
 //******************************************************** */
-var jabo = Planta(
-  id: 0,
-  nome: 'Jaboticabeira',
-  apelido: 'Fiinha',
-  idade: 6
-);
+  var jabo = Planta(id: 0, nome: 'Jaboticabeira', apelido: 'Fiinha', idade: 6);
 //******************************************************** */
-await inserirPlanta(jabo);
-print(await listaPlantas());
-jabo = Planta(
-  id: jabo.id,
-  nome: jabo.nome,
-  apelido: jabo.apelido,
-  idade: jabo.idade + 1
-);
-await atualizaPlanta(jabo);
-print(await listaPlantas());
-deletarPlanta(jabo.id);
-print(await listaPlantas());
-
+  await inserirPlanta(jabo);
+  print(await listaPlantas());
+  jabo = Planta(
+      id: jabo.id,
+      nome: jabo.nome,
+      apelido: jabo.apelido,
+      idade: jabo.idade + 1);
+  await atualizaPlanta(jabo);
+  print(await listaPlantas());
+  deletarPlanta(jabo.id);
+  print(await listaPlantas());
 
 //******************************************************** */
 }
+
 class Planta {
   final int id;
   final String nome;
