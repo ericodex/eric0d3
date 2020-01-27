@@ -10,7 +10,7 @@ class Space extends StatelessWidget {
         child: Container(
             width: 600,
             height: 400,
-            child: FlareActor("assets/space_vapowave.flr",
+            child: FlareActor("assets/space_vapowave.flr2d",
                 animation: "space'84"
                 )));
   }
