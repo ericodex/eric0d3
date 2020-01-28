@@ -217,7 +217,7 @@ class Botao extends StatelessWidget {
                   //-------------------------------------
                   Navigator.push(context,
                       //MaterialPageRoute(builder: (context) => SegundaPagina()));
-                      MaterialPageRoute(builder: (context) => SwitchDayNight()));
+                      MaterialPageRoute(builder: (context) => InterruptorCicardiano()));
                   //-------------------------------------
                 },
               ),
