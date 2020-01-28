@@ -20,7 +20,7 @@ class _VapowaveSpaceState extends State<VapowaveSpace> {
             child: SmartFlareActor(
           width: screenSize.width,
           height: screenSize.height,
-          filename: 'assets/space_vapowave.flr',
+          filename: 'assets/space_vaporwave.flr',
           startingAnimation: "space'84",
         )));
   }

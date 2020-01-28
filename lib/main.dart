@@ -7,7 +7,6 @@ import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
 import 'objetos_flare.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 void main() async => runApp(MeuAplicativo());
 
@@ -52,7 +51,6 @@ class Box extends StatelessWidget {
 }
 
 class TypewriterText extends StatelessWidget {
-  final _font = GoogleFonts.pressStart2P();
 
   final String text;
   TypewriterText(this.text);
@@ -75,7 +73,7 @@ class TypewriterText extends StatelessWidget {
                     color: Colors.green,
                     size: 24.0,
                   ),
-                  Text(text.substring(0, textLength), style: _font),
+                  Text(text.substring(0, textLength)),
                   ControlledAnimation(
                     playback: Playback.LOOP,
                     duration: Duration(milliseconds: 600),
@@ -83,7 +81,7 @@ class TypewriterText extends StatelessWidget {
                     builder: (context, oneOrZero) {
                       return Opacity(
                           opacity: oneOrZero == 1 ? 1.0 : 0.0,
-                          child: Text("_", style: _font));
+                          child: Text("_"));
                     },
                   ),
                   Icon(
