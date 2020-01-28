@@ -7,6 +7,7 @@ import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
 import 'objetos_flare.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async => runApp(MeuAplicativo());
 
@@ -51,11 +52,7 @@ class Box extends StatelessWidget {
 }
 
 class TypewriterText extends StatelessWidget {
-  static const TEXT_STYLE = TextStyle(
-      letterSpacing: 5,
-      fontSize: 24,
-      fontWeight: FontWeight.w600,
-      color: Colors.green);
+  final _font = GoogleFonts.pressStart2P();
 
   final String text;
   TypewriterText(this.text);
@@ -78,7 +75,7 @@ class TypewriterText extends StatelessWidget {
                     color: Colors.green,
                     size: 24.0,
                   ),
-                  Text(text.substring(0, textLength), style: TEXT_STYLE),
+                  Text(text.substring(0, textLength), style: _font),
                   ControlledAnimation(
                     playback: Playback.LOOP,
                     duration: Duration(milliseconds: 600),
@@ -86,7 +83,7 @@ class TypewriterText extends StatelessWidget {
                     builder: (context, oneOrZero) {
                       return Opacity(
                           opacity: oneOrZero == 1 ? 1.0 : 0.0,
-                          child: Text("_", style: TEXT_STYLE));
+                          child: Text("_", style: _font));
                     },
                   ),
                   Icon(
@@ -122,8 +119,7 @@ class MeuAplicativo extends StatelessWidget {
           duration: 4000,
           type: CustomSplashType.StaticDuration,
           outputAndHome: op,
-        ) // Widget Pagina Inicial
-        );
+        ));
   }
 }
 
@@ -195,7 +191,8 @@ class Botao extends StatelessWidget {
                 color: Colors.green[300],
                 onPressed: () {
                   //-------------------------------------
-                  Navigator.push(context,
+                  Navigator.push(
+                      context,
                       //MaterialPageRoute(builder: (context) => SegundaPagina()));
                       MaterialPageRoute(builder: (context) => VapowaveSpace()));
                   //-------------------------------------
@@ -215,9 +212,11 @@ class Botao extends StatelessWidget {
                 color: Colors.green[300],
                 onPressed: () {
                   //-------------------------------------
-                  Navigator.push(context,
+                  Navigator.push(
+                      context,
                       //MaterialPageRoute(builder: (context) => SegundaPagina()));
-                      MaterialPageRoute(builder: (context) => InterruptorCicardiano()));
+                      MaterialPageRoute(
+                          builder: (context) => InterruptorCicardiano()));
                   //-------------------------------------
                 },
               ),
@@ -230,14 +229,13 @@ class Botao extends StatelessWidget {
 }
 
 class SegundaPagina extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: Icon( Icons.favorite,)
-        ));
+            child: Icon(
+      Icons.favorite,
+    )));
   }
 }
 

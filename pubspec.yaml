@@ -17,6 +17,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flare_flutter: any  
   smart_flare: any
+  google_fonts: ^0.3.4
 
 dev_dependencies:
   flutter_native_splash: ^0.1.9
