@@ -6,7 +6,7 @@ import 'cards.dart';
 import 'package:custom_splash/custom_splash.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'dart:core';
-import 'settings.dart';
+import 'objetos_flare.dart';
 
 void main() async => runApp(MeuAplicativo());
 
@@ -197,7 +197,7 @@ class Botao extends StatelessWidget {
                   //-------------------------------------
                   Navigator.push(context,
                       //MaterialPageRoute(builder: (context) => SegundaPagina()));
-                      MaterialPageRoute(builder: (context) => Settings()));
+                      MaterialPageRoute(builder: (context) => VapowaveSpace()));
                   //-------------------------------------
                 },
               ),
@@ -217,7 +217,7 @@ class Botao extends StatelessWidget {
                   //-------------------------------------
                   Navigator.push(context,
                       //MaterialPageRoute(builder: (context) => SegundaPagina()));
-                      MaterialPageRoute(builder: (context) => Interruptor_page()));
+                      MaterialPageRoute(builder: (context) => SwitchDayNight()));
                   //-------------------------------------
                 },
               ),

@@ -1,39 +1,58 @@
+
 import 'package:flutter/material.dart';
-import 'package:flare_flutter/flare_actor.dart';
+import 'package:smart_flare/smart_flare.dart';
 
-class Space extends StatelessWidget {
+class VapowaveSpace extends StatefulWidget {
+  const VapowaveSpace({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
+  _VapowaveSpaceState createState() => _VapowaveSpaceState();
+}
 
-        child: Container(
-            width: 600,
-            height: 400,
-            child: FlareActor("assets/space_vapowave.flr2d",
-                animation: "space'84"
-                )));
+class _VapowaveSpaceState extends State<VapowaveSpace> {
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: SmartFlareActor(
+            width: screenSize.width,
+            height: screenSize.height,
+            filename: 'assets/space_vapowave.flr',
+            startingAnimation: "space'84",
+          )
+        ));
   }
 }
 
-class DayNigth extends StatelessWidget {
+class SwitchDayNight extends StatefulWidget {
+  const SwitchDayNight({Key key}) : super(key: key);
 
-  bool interruptor = false;
-  final VoidCallback onToggle;
-  final bool snapToEnd;
+  @override
+  _SwitchDayNightState createState() => _SwitchDayNightState();
+}
 
-  DayNigth(this.interruptor,{this.snapToEnd,this.onToggle});
+class _SwitchDayNightState extends State<SwitchDayNight> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: onToggle,
-        child: Container(
-            width: 600,
-            height: 400,
-            child: FlareActor("assets/switch_daytime.flr",
-                  animation: interruptor ? "night_idle" : "day_idle"
-                  ),
-                
-            ));
+    var screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: Center(
+          child: SmartFlareActor(
+            filename: 'assets/switch_daytime.flr',
+            width: screenSize.width,
+            height: 50,
+            startingAnimation: "night_idle",
+            activeAreas: [
+        RelativePanArea(
+          area: Rect.fromLTWH(0, 0, 0, 0),
+          debugArea: false
+        )
+      ],
+          ),
+        ));
   }
 }
+
